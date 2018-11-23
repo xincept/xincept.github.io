@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0 user-scalable=no">
+    <title>IndoorMap 2D demo</title>
+</head>
+<body>
+<script src="Indoor3D/js/three.min.js"></script>
+<script src="Indoor3D/js/Detector.js"></script>
+<script src="Indoor3D/js/OrbitControls.js"></script>
+<script src="Indoor3D/js/IndoorMap.js"></script>
+<script src="Indoor3D/js/stats.min.js"></script>
+<script src="Indoor3D/js/Projector.js"></script>
+<script src="Indoor3D/js/IndoorMap2d.js"></script>
+<script src="Indoor3D/js/IndoorMap3d.js"></script>
+<link href="Indoor3D/css/indoor3D.css" rel="stylesheet">
+
+<script>
+
+
+    var params = {
+            dim:"2d"
+    }
+
+    var map = IndoorMap(params);
+    map.load('Indoor3D/data/爱琴海购物中心.json', function(){
+        map.showFloor(1);
+        map.setSelectable(false);
+        map.showPubPoints(true);
+        map.setSelectable(true);
+
+        var ul = IndoorMap.getUI(map);
+        document.body.appendChild(ul);
+    });
+
+    var stats = new Stats();
+    stats.domElement.style.position = 'absolute';
+    stats.domElement.style.top = '0px';
+    document.body.appendChild(stats.domElement);
+    animate();
+
+    function animate(){
+        requestAnimationFrame(animate);
+        stats.update();
+    }
+</script>
+<div class="testButton">
+<ul >
+<li onclick="indoorMap.zoomIn(1.2)">Zoom In</li>
+<li onclick="indoorMap.zoomOut(0.8)">Zoom Out</li>
+<li onclick="indoorMap.setDefaultView()">Default View</li>
+</ul>
+</div>
+
+</body>
+</html>

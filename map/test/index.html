@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+    <title></title>
+    <style type="text/css">
+        /**{margin:0;padding:0}*/
+        /*html,body{height:100%}*/
+        #canvas{position:relative;width:100%;height:100%;background-color:#ccc}
+    </style>
+</head>
+<body>
+<div id="canvas">
+    <canvas id="spirit" width="600" height="600" style="position:absolute; border: 2px solid #000000"></canvas>
+</div>
+<script type="text/javascript">
+    var canvas = document.getElementById("canvas"),
+            startX,
+            startY,
+    oriX,oriY;
+    spirit = document.getElementById("spirit");
+    canvas.appendChild(spirit);
+    spirit.className = "spirit";
+    spirit.style.left = "20px";
+    spirit.style.top = "20px";
+
+    var cxt=spirit.getContext("2d");
+    var img=new Image();
+    img.src="/xmas.jpg";
+    cxt.drawImage(img,0,0);
+    cxt.fillStyle="#FFFFFF";
+    cxt.fillRect(0,0,600,600);
+    cxt.fillStyle="#FF0000";
+    cxt.fillRect(150,150,300,300);
+
+
+
+    function touchStart(event) {
+
+        event.preventDefault();
+
+        var touch = event.touches[0];
+        startX = touch.pageX;
+        startY = touch.pageY;
+        oriX = parseInt(spirit.style.left);
+        oriY = parseInt(spirit.style.top);
+
+    }
+    canvas.addEventListener("touchstart", touchStart, false);
+
+    function touchMove(event) {
+        event.preventDefault();
+        if (!spirit || !event.touches.length) return;
+        var touch = event.touches[0],
+                x = touch.pageX - startX,
+                y = touch.pageY - startY;
+
+
+        spirit.style.left = oriX + x + "px";
+        spirit.style.top = oriY + y + "px";
+
+    }
+    canvas.addEventListener("touchmove", touchMove, false);
+
+    function touchEnd(event) {
+
+    }
+    canvas.addEventListener("touchend", touchEnd, false);
+</script>
+</body>
+</html>
