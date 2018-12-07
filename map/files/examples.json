@@ -6,7 +6,11 @@
       "items": [
         {
           "id": "xmap_basic",
-          "name": "基本地图显示",
+          "name": "基本地图显示"
+        },
+        {
+          "id": "xmap_view_mode",
+          "name": "2D/3D切换",
           "isNew": true
         }
       ]
@@ -16,8 +20,7 @@
       "items": [
         {
           "id": "xmap_marker_basic",
-          "name": "添加覆盖物",
-          "isNew": true
+          "name": "添加覆盖物"
         }
       ]
     }

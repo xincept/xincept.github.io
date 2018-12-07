@@ -32,7 +32,7 @@ function initMenu() {
   `;
   let context = compileTemplate(template);
   $.ajax({
-    url: "files/examples.json",
+    url: "../files/examples.json",
     method: "get"
   }).then(json => {
     json = typeof json === "string" ? JSON.parse(json) : json;
@@ -110,28 +110,28 @@ var clip = null;
 var copyTimer = null; //显示复制成功的定时器
 function init() {
   // debugger;
-  clip = new ZeroClipboard.Client();
-  clip.setHandCursor(true);
-  clip.addEventListener("load", function(client) {
-    debugstr("Flash movie loaded and ready.");
-  });
-  clip.addEventListener("mouseOver", function(client) {
-    // update the text on mouse over
-    $("#d_clip_button").css({ fontWeight: "bold" });
-    var iframeContent = $("#myresource").val();
-    if (editor) {
-      iframeContent = editor.getValue();
-    }
-    clip.setText(iframeContent);
-  });
-  clip.addEventListener("mouseOut", function(client) {
-    $("#d_clip_button").css({ fontWeight: "normal" });
-    // $("#d_clip_button").style.fontWeight = "normal";
-  });
-  clip.addEventListener("complete", function(client, text) {
-    debugstr("Copied text to clipboard: " + text);
-  });
-  clip.glue("d_clip_button");
+  // clip = new ZeroClipboard.Client();
+  // clip.setHandCursor(true);
+  // clip.addEventListener("load", function(client) {
+  //   debugstr("Flash movie loaded and ready.");
+  // });
+  // clip.addEventListener("mouseOver", function(client) {
+  //   // update the text on mouse over
+  //   $("#d_clip_button").css({ fontWeight: "bold" });
+  //   var iframeContent = $("#myresource").val();
+  //   if (editor) {
+  //     iframeContent = editor.getValue();
+  //   }
+  //   clip.setText(iframeContent);
+  // });
+  // clip.addEventListener("mouseOut", function(client) {
+  //   $("#d_clip_button").css({ fontWeight: "normal" });
+  //   // $("#d_clip_button").style.fontWeight = "normal";
+  // });
+  // clip.addEventListener("complete", function(client, text) {
+  //   debugstr("Copied text to clipboard: " + text);
+  // });
+  // clip.glue("d_clip_button");
 }
 
 var initEditor = function() {
@@ -148,7 +148,12 @@ var initEditor = function() {
         matchBrackets: true
       }
     );
-    setIntro();
+    var location = window.location.toString();
+    let id
+    if (location.indexOf("#") > 0) {
+      id = location.substr(location.indexOf("#") + 1);
+    }
+    setIntro(id);
   } else {
     elCodeEditor.setValue(elTextArea.value);
   }
@@ -165,7 +170,7 @@ function refresh() {
 }
 
 function setIntro(id = "xmap_basic") {
-  elContainer.setAttribute("src", "examples/" + id + ".html");
+  elContainer.setAttribute("src", "./" + id + ".html");
   var location = window.location.toString();
   if (location.indexOf("#") > 0) {
     location = location.substr(0, location.indexOf("#"));
@@ -185,7 +190,7 @@ function getresource() {
     }
   }
   var mylink;
-  let url = "examples/";
+  let url = "./";
   if (window.location.toString().indexOf("#") == -1) {
     mylink = url + "xmap_basic.html";
   } else {
@@ -196,7 +201,6 @@ function getresource() {
   xmlHttp.send();
   if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
     str = xmlHttp.responseText; //str即为返回的html内容
-    str = str.replace(/\"\.\.\//g, '"');
     localStorage.content = str;
     elTextArea.value = str;
     initEditor();

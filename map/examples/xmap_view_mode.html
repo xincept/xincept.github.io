@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <script src="../lib/xmap.min.js"></script>
+    <link rel="stylesheet" href="../lib/bootstrap.min.css">
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+      	position: relative;
+      }
+      .viewmode-group {
+      	position: absolute;
+        bottom: 10px;
+        left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="xmap"></div>
+    <div class="viewmode-group btn-group-vertical" data-toggle="buttons">
+		<button class="btn btn-default">2D</button>
+		<button class="btn btn-default btn-primary">3D</button>
+	</div>
+    <div>
+    <script>
+      window.onload = function() {
+        var map = new XMap.Map("#xmap", {});
+        map.load("../files/data.json", function() {});
+        var aBtn = document.querySelectorAll('.btn');
+			//开启2维模式
+        aBtn[0].onclick = function() {
+          //设置地图为2维模式
+          map.setViewMode(XMap.ViewMode.MODE_2D)
+          this.classList.add('btn-primary');
+          aBtn[1].classList.remove('btn-primary');
+        };
+
+        //开启3维模式
+        aBtn[1].onclick = function() {
+          //设置地图为3维模式
+          map.setViewMode(XMap.ViewMode.MODE_3D)
+          this.classList.add('btn-primary');
+          aBtn[0].classList.remove('btn-primary');
+        };
+      }
+    </script>
+  </body>
+</html>

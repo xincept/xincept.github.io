@@ -46,6 +46,7 @@ body {
 ::-webkit-scrollbar-thumb {
 	border-radius: 0px;
 	/*background: #40b24a;*/
+	box-shadow: inset 3px 3px 3px 10px #e4e4e4;
 	-webkit-box-shadow: inset 3px 3px 3px 10px #e4e4e4;
 }
 
@@ -167,7 +168,6 @@ body {
 #menu .submenu dl dd:before {
 	border-bottom: 1px dotted #b0b5c2;
 	content: "";
-	display: inline-block;
 	float: left;
 	width: 10px;
 	margin: -15px 0 0;
@@ -215,11 +215,11 @@ body {
 }
 
 #menu .t_close {
-	background: url(../img/result.png) no-repeat 0 -96px;
+	background: url(../examples/img/result.png) no-repeat 0 -96px;
 }
 
 #menu .t_open {
-	background: url(../img/result.png) no-repeat 0 -119px;
+	background: url(../examples/img/result.png) no-repeat 0 -119px;
 }
 
 /**代码部分**/
@@ -267,7 +267,7 @@ body {
 
 #code_area #openbar .on {
 	color: #0083d6;
-	background: url(../img/tab.png) no-repeat 0 7px;
+	background: url(../examples/img/tab.png) no-repeat 0 7px;
 }
 
 #code_area #d_menu {
@@ -294,32 +294,32 @@ body {
 }
 
 #code_area #d_clip_container a {
-	background: url(../img/result.png) no-repeat 0 2px;
+	background: url(../examples/img/result.png) no-repeat 0 2px;
 	color: #3189f3;
 	padding-left: 15px;
 }
 
 #code_area #d_run_container a {
-	background: url(../img/result.png) no-repeat 0 -23px;
+	background: url(../examples/img/result.png) no-repeat 0 -23px;
 	color: #3189f3;
 	padding-left: 17px;
 }
 
 #code_area #d_refresh_container a {
-	background: url(../img/result.png) no-repeat 0 -47px;
+	background: url(../examples/img/result.png) no-repeat 0 -47px;
 	color: #3189f3;
 	padding-left: 20px;
 }
 
 #code_area #d_help_container a {
-	background: url(../img/result.png) no-repeat 0 -71px;
+	background: url(../examples/img/result.png) no-repeat 0 -71px;
 	color: #3189f3;
 	padding-left: 17px;
 }
 
 #code_close {
 	display: none;
-	background: url(../img/result.png) no-repeat 0 -142px;
+	background: url(../examples/img/result.png) no-repeat 0 -142px;
 	width: 14px;
 	height: 90px;
 	position: absolute;
@@ -331,7 +331,7 @@ body {
 
 #code_open {
 	display: none;
-	background: url(../img/result.png) no-repeat 0 -242px;
+	background: url(../examples/img/result.png) no-repeat 0 -242px;
 	width: 14px;
 	height: 90px;
 	position: absolute;
