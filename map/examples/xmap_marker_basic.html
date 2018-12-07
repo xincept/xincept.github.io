@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <script src="../lib/xmap.min.js"></script>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="xmap"></div>
+    <script>
+      window.onload = function() {
+        var map = new XMap.Map("#xmap", {});
+        map.load("../files/data.json", function() {});
+        let location = new XMap.Location("F1", 0, 0);
+        let marker = new XMap.Marker(location, {
+          icon: "../img/peopleMarker.png",
+          size: new XMap.Vector2(25, 25),
+          align: "BOTTOM",
+          onHover(hovered) {
+            if (hovered) {
+              console.log(`Hovered`);
+            }
+          }
+        });
+        map.addOverlay(marker);
+      };
+    </script>
+  </body>
+</html>

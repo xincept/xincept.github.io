@@ -1,0 +1,25 @@
+{
+  "url": "examples/",
+  "groups": [
+    {
+      "name": "地图显示",
+      "items": [
+        {
+          "id": "xmap_basic",
+          "name": "基本地图显示",
+          "isNew": true
+        }
+      ]
+    },
+    {
+      "name": "覆盖物",
+      "items": [
+        {
+          "id": "xmap_marker_basic",
+          "name": "添加覆盖物",
+          "isNew": true
+        }
+      ]
+    }
+  ]
+}

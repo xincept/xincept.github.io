@@ -1,0 +1,27 @@
+{
+  "name": "xincept.github.io",
+  "version": "0.1.0",
+  "description": "xincept's homepage",
+  "main": "index.js",
+  "scripts": {
+    "dev": "http-server -c-1 -p 8382",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://xincept:xiaobu930@github.com/xincept/xincept.github.io.git"
+  },
+  "keywords": [
+    "map",
+    "xincept"
+  ],
+  "author": "xincept",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xincept/xincept.github.io/issues"
+  },
+  "homepage": "https://github.com/xincept/xincept.github.io#readme",
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}

@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="lib/codemirror.css" />
+    <link rel="stylesheet" href="css/main.css" />
+
+    <script src="lib/jquery-3.3.1.min.js"></script>
+
+    <script src="lib/codemirror.js"></script>
+    <script src="lib/xml/xml.js"></script>
+    <script src="lib/javascript/javascript.js"></script>
+    <script src="lib/css/css.js"></script>
+    <script src="lib/htmlmixed/htmlmixed.js"></script>
+    <script src="lib/ZeroClipboard.js"></script>
+
+    <script src="js/dragbar.js"></script>
+  </head>
+  <body>
+    <div>
+      <div id="menu">
+      </div>
+      <div id="code_area" style="width: 500px;">
+        <div id="openbar" unselectable="on">
+          <div id="d_menu">
+            <div id="d_clip_container">
+              <a
+                data-clipboard-target="#myresource"
+                id="d_clip_button"
+                class="copy"
+                >复制</a
+              >
+            </div>
+            <div id="d_run_container">
+              <a id="d_run_button" onclick="run();" class="run">运行</a>
+            </div>
+            <div id="d_refresh_container">
+              <a id="d_refresh_button" onclick="refresh();">刷新</a>
+            </div>
+          </div>
+          <p>源代码编辑器</p>
+        </div>
+        <textarea
+          id="myresource"
+          class="clearfix"
+          onchange="clip.setText(this.value)"
+          style="display: none; width: 464px;"
+        ></textarea>
+        <div class="CodeMirror cm-s-default CodeMirror-wrap">
+          <div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 137px; left: 206.516px;"
+          >
+            <textarea
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="false"
+              style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"
+              tabindex="0"
+            ></textarea>
+          </div>
+        </div>
+        <div
+          id="code_close"
+          onclick="toggleFooter()"
+          style="display: block;"
+        ></div>
+      </div>
+      <div id="drag"></div>
+      <div id="mapContent" class="clearfix">
+        <div
+          id="code_open"
+          onclick="toggleFooter()"
+          style="display: none;"
+        ></div>
+        <iframe
+          unselectable="on"
+          id="container"
+          style="width: 100%; height: 100%; display: inline-block;"
+        ></iframe>
+      </div>
+    </div>
+    <script src="js/main.js"></script>
+    <script>
+      var dragbar = new DragBar("#drag", "#code_area", "#container", {
+        maxLeftWidth: 800,
+        callback: () => {}
+      });
+
+      window.onload = function() {
+        initEditor();
+        initMenu();
+      };
+      window.addEventListener("resize", () => dragbar.refresh());
+    </script>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <script src="../lib/xmap.min.js"></script>
+    <style>
+      * {
+      	padding: 0;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="xmap"></div>
+    <script>
+      window.onload = function() {
+        var map = new XMap.Map("#xmap", {});
+        map.load("../files/data.json", function() {});
+      };
+    </script>
+  </body>
+</html>
