@@ -18,12 +18,7 @@
         let marker = new XMap.Marker(location, {
           icon: "img/peopleMarker.png",
           size: new XMap.Vector2(25, 25),
-          align: "BOTTOM",
-          onHover(hovered) {
-            if (hovered) {
-              console.log(`Hovered`);
-            }
-          }
+          align: "BOTTOM"
         });
         map.addOverlay(marker);
       };
