@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <script src="../lib/xmap.min.js"></script>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="xmap"></div>
+    <script>
+      window.onload = function() {
+        var map = new XMap.Map("#xmap", {});
+        map.load("../files/data.json", function() {});
+        class CustomOverlay extends XMap.HTMLOverlay {
+          initialize() {
+            let span = document.createElement("span");
+            span.style.border = "solid 1px blue";
+            span.style.background = "white";
+            span.style.color = "red";
+            span.style.position = "absolute";
+            span.style.padding = "3px 4px";
+            span.style.width = "130px";
+            span.style.fontSize = "14px";
+            span.appendChild(document.createTextNode(this.options.content));
+            return span;
+          }
+
+          render(position) {
+            this.$el.style.left = position.x + "px";
+            this.$el.style.top = position.y - this.$el.clientHeight + "px";
+            this.$el.style.zIndex = position.zIndex;
+          }
+        }
+        let location = new XMap.Location("F1", 0, 0);
+        let infoWindow = new CustomOverlay(location, {
+          content: "it's a custom overlay"
+        });
+        map.addOverlay(infoWindow);
+      };
+    </script>
+  </body>
+</html>

@@ -24,7 +24,11 @@
         },
         {
           "id": "xmap_overlay_info_window",
-          "name": "信息窗口"
+          "name": "HTML信息窗口"
+        },
+        {
+          "id": "xmap_overlay_html_custom",
+          "name": "自定义HTML覆盖物"
         }
       ]
     },
