@@ -10,8 +10,7 @@
         },
         {
           "id": "xmap_view_mode",
-          "name": "2D/3D切换",
-          "isNew": true
+          "name": "2D/3D切换"
         }
       ]
     },
@@ -24,11 +23,13 @@
         },
         {
           "id": "xmap_overlay_info_window",
-          "name": "HTML信息窗口"
+          "name": "HTML信息窗口",
+          "isNew": true
         },
         {
           "id": "xmap_overlay_html_custom",
-          "name": "自定义HTML覆盖物"
+          "name": "自定义HTML覆盖物",
+          "isNew": true
         }
       ]
     },
