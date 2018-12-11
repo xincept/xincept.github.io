@@ -19,8 +19,12 @@
       "name": "覆盖物",
       "items": [
         {
-          "id": "xmap_marker_basic",
+          "id": "xmap_overlay_basic",
           "name": "添加覆盖物"
+        },
+        {
+          "id": "xmap_overlay_info_window",
+          "name": "信息窗口"
         }
       ]
     },
