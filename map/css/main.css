@@ -228,9 +228,7 @@ body {
 	position: relative;
 	z-index: 999;
 	width: 500px;
-	height: -moz-calc(100% - 36px);
-	height: -webkit-calc(100% - 36px);
-	height: calc(100% - 36px);
+	height: 100%;
 	float: left;
 	-webkit-user-select: none;
 	font-size: 12px;

@@ -23,7 +23,7 @@
             let location = new XMap.Location(event.floor, event.x, event.y);
             let marker = new XMap.Marker(location, {
               icon: "img/peopleMarker.png",
-              size: new XMap.Vector2(25, 25),
+              size: new XMap.Size(25),
               align: "BOTTOM"
             });
             map.addOverlay(marker);

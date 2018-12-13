@@ -86,6 +86,9 @@ function initMenu() {
       }
       //代码宽度还原
       $("#code_area").width(500);
+      $("#code_close").show();
+      $("#code_open").hide();
+      dragbar.refresh()
     });
     menuLocation();
   });
@@ -149,7 +152,7 @@ var initEditor = function() {
       }
     );
     var location = window.location.toString();
-    let id
+    let id;
     if (location.indexOf("#") > 0) {
       id = location.substr(location.indexOf("#") + 1);
     }
