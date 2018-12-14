@@ -18,13 +18,16 @@
       window.onload = function() {
         var map = new XMap.Map("#xmap", {});
         map.load("../files/data.json");
-        let location = new XMap.Location("F1", 0, 0);
-        let marker = new XMap.Marker(location, {
-          icon: "img/peopleMarker.png",
-          size: new XMap.Size(25),
-          align: "BOTTOM"
+        // 添加单次点击事件，触发一次后移除
+        map.once("click", event => {
+          let location = new XMap.Location(event.floor, event.x, event.y);
+          let marker = new XMap.Marker(location, {
+            icon: "img/peopleMarker.png",
+            size: new XMap.Size(25),
+            align: "BOTTOM"
+          });
+          map.addOverlay(marker);
         });
-        map.addOverlay(marker);
       };
     </script>
   </body>

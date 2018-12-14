@@ -39,6 +39,11 @@
         {
           "id": "xmap_event_map",
           "name": "地图点击事件"
+        },
+        {
+          "id": "xmap_event_map_once",
+          "name": "自动移除点击事件",
+          "isNew": true
         }
       ]
     }

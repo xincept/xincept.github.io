@@ -6,6 +6,10 @@
         padding: 0;
         margin: 0;
       }
+      #xmap {
+        width: 100%;
+        height: 100%;
+      }
     </style>
   </head>
   <body>
@@ -13,7 +17,7 @@
     <script>
       window.onload = function() {
         var map = new XMap.Map("#xmap", {});
-        map.load("../files/data.json", function() {});
+        map.load("../files/data.json");
         let location = new XMap.Location("F1", 0, 0);
         let infoWindow = new XMap.HTMLInfoWindow(location, {
           content: "it's an info window"

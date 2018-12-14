@@ -7,6 +7,10 @@
         padding: 0;
         margin: 0;
       }
+      #xmap {
+        width: 100%;
+        height: 100%;
+      }
       body {
       	position: relative;
       }
@@ -29,7 +33,7 @@
         var map = new XMap.Map("#xmap", {
         	viewMode:XMap.ViewMode.MODE_2D
         });
-        map.load("../files/data.json", function() {});
+        map.load("../files/data.json");
         var aBtn = document.querySelectorAll('.btn');
 			//开启2维模式
         aBtn[0].onclick = function() {
