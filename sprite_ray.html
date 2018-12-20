@@ -1,338 +1,348 @@
 <!DOCTYPE html>
 <!-- saved from url=(0080)https://rawgit.com/06wj/three.js/patch0_build/examples/webgl_raycast_sprite.html -->
 <html lang="en">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>three.js webgl - raycast - sprite</title>
 
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
     <style>
-        body {
-            font-family: Monospace;
-            font-size: 13px;
-            text-align: center;
+      body {
+        font-family: Monospace;
+        font-size: 13px;
+        text-align: center;
 
-            margin: 0px;
-            background-color: #fff;
-            overflow: hidden;
-        }
+        margin: 0px;
+        background-color: #fff;
+        overflow: hidden;
+      }
 
-        #info {
-            position: absolute;
-            z-index: 1;
-            width: 100%;
-            padding: 5px;
-            text-align: center;
-        }
+      #info {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        padding: 5px;
+        text-align: center;
+      }
     </style>
-</head>
+  </head>
 
-<body style="">
-    <div id="info"><a href="http://threejs.org/" target="_blank" rel="noopener">three.js</a> - webgl raycast sprite<br></div>
+  <body style="">
+    <div id="info">
+      <a href="http://threejs.org/" target="_blank" rel="noopener">three.js</a>
+      - webgl raycast sprite<br />
+    </div>
     <script src="./libs/three.min.js"></script>
     <script src="./libs/OrbitControls.js"></script>
     <script>
+      var renderer, scene, camera;
+      var controls, group;
+      var sprite
 
-        var renderer, scene, camera;
-		var controls, group;
+      init();
+      animate();
 
-		init();
-		animate();
+      function init() {
+        // init renderer
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
 
-		function init() {
+        // init scene
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xffffff);
 
-			// init renderer
-			renderer = new THREE.WebGLRenderer( { antialias: true } );
-			renderer.setPixelRatio( window.devicePixelRatio );
-			renderer.setSize( window.innerWidth, window.innerHeight );
-			document.body.appendChild( renderer.domElement );
+        group = new THREE.Group();
+        scene.add(group);
 
-			// init scene
-			scene = new THREE.Scene();
-			scene.background = new THREE.Color( 0xffffff );
+        // init camera
+        camera = new THREE.PerspectiveCamera(
+          120,
+          window.innerWidth / window.innerHeight,
+          10,
+          10000
+        );
+        camera.position.set(0, 100, 0);
+        camera.lookAt(scene.position);
 
-			group = new THREE.Group();
-			scene.add( group );
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableRotate = true;
 
-			// init camera
-			camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 1000 );
-			camera.position.set( 15, 15, 15 );
-			camera.lookAt( scene.position );
+        // add sprites
 
-			controls = new THREE.OrbitControls( camera, renderer.domElement );
-			controls.enableRotate = true;
+        var sprite = new THREE.Sprite(
+          new THREE.SpriteMaterial({ color: "#69f" })
+        );
+        sprite.position.set(6, 5, 5);
+        sprite.scale.set(2, 5, 1);
+        // group.add(sprite);
 
-			// add sprites
+        var sprite = new THREE.Sprite(
+          new THREE.SpriteMaterial({ color: "#69f" })
+        );
+        sprite.material.rotation = (Math.PI / 3) * 4;
+        sprite.position.set(8, -2, 2);
+        sprite.center.set(0.5, 0);
+        sprite.scale.set(1, -5, 1);
+        // group.add(sprite);
 
-			var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { color: '#69f' } ) );
-			sprite.position.set( 6, 5, 5 );
-			sprite.scale.set( 2, 5, 1 );
-			group.add( sprite );
+        var group2 = new THREE.Object3D();
+        group2.scale.set(1, 2, 1);
+        group2.position.set(-5, 0, 0);
+        group2.rotation.set(Math.PI / 2, 0, 0);
+        // group.add(group2);
 
-			var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { color: '#69f' } ) );
-			sprite.material.rotation = Math.PI / 3 * 4;
-			sprite.position.set( 8, - 2, 2 );
-			sprite.center.set( 0.5, 0 );
-			sprite.scale.set( 1, - 5, 1 );
-			group.add( sprite );
+        var sprite = new THREE.Sprite(
+          new THREE.SpriteMaterial({ color: "#69f" })
+        );
+        sprite.position.set(0, 2, 5);
+        sprite.scale.set(10, 2, 3);
+        sprite.center.set(-0.1, 0);
+        sprite.material.rotation = Math.PI / 3;
+        // group2.add(sprite);
 
-			var group2 = new THREE.Object3D();
-			group2.scale.set( 1, 2, 1 );
-			group2.position.set( - 5, 0, 0 );
-			group2.rotation.set( Math.PI / 2, 0, 0 );
-			group.add( group2 );
+        var num = 1;
+        var radius = 10;
+        var func = function() {
+          this.scale.set(this.width / 812, this.height / 812, 1);
+          //   console.log(
+          //     new THREE.Vector3().setFromMatrixPosition(this.modelViewMatrix)
+          //   );
+        };
+        while (num--) {
+          var x = Math.random() - 0.5;
+          var y = Math.random() - 0.5;
+          var z = Math.random() - 0.5;
 
-			var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { color: '#69f' } ) );
-			sprite.position.set( 0, 2, 5 );
-			sprite.scale.set( 10, 2, 3 );
-			sprite.center.set( - 0.1, 0 );
-			sprite.material.rotation = Math.PI / 3;
-			group2.add( sprite );
+          var sprite = new THREE.Sprite(
+            new THREE.SpriteMaterial({ color: "#96f" })
+          );
+        //   sprite.position.set(x, y, z);
+          sprite.position.normalize();
+          sprite.position.multiplyScalar(radius);
+          sprite.scale.set(1, 1, 0.05 * Math.random());
+          sprite.width = Math.random() * 50 + 10;
+          sprite.height = Math.random() * 50 + 10;
+          // sprite.material.rotation = Math.random() * Math.PI * 2;
+          sprite.material.sizeAttenuation = false;
+          group.add(sprite);
+        //   sprite.onBeforeRender = func;
+        }
 
+        var starsGeometry = new THREE.Geometry();
 
-			var num = 20;
-			var radius = 10;
-			while(num --) {
+        window.addEventListener("resize", onWindowResize, false);
+        window.addEventListener("mousemove", onDocumentMouseMove, false);
+      }
 
-				var x = Math.random() - 0.5;
-				var y = Math.random() - 0.5;
-				var z = Math.random() - 0.5;
+      function animate() {
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+      }
 
-				var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { color: '#96f' } ));
-				sprite.position.set( x, y, z );
-				sprite.position.normalize();
-				sprite.position.multiplyScalar( radius );
-				sprite.scale.set(0.05 * Math.random(), 0.05 * Math.random(), 0.05 * Math.random());
-				sprite.material.rotation = Math.random() * Math.PI * 2;
-				sprite.material.sizeAttenuation = false;
-				group.add( sprite );
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
 
-			}
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
 
-			window.addEventListener( 'resize', onWindowResize, false );
-			window.addEventListener( "mousemove", onDocumentMouseMove, false );
+      var selectedObject = null;
 
-		}
+      function onDocumentMouseMove(event) {
+        event.preventDefault();
+        if (selectedObject) {
+          selectedObject.material.color.set(selectedObject.originColor);
+          selectedObject = null;
+        }
 
-		function animate() {
+        var intersects = getIntersects(event.layerX, event.layerY);
+        if (intersects.length > 0) {
+          var res = intersects.filter(function(res) {
+            return res && res.object;
+          })[0];
 
-			renderer.render( scene, camera );
-			requestAnimationFrame( animate );
+          if (res && res.object) {
+            selectedObject = res.object;
+            selectedObject.originColor = selectedObject.material.color.getHex();
+            selectedObject.material.color.set("#f00");
+          }
+        }
+      }
 
-		}
+      var raycaster = new THREE.Raycaster();
+      var mouseVector = new THREE.Vector3();
 
-		function onWindowResize() {
+      function getIntersects(x, y) {
+        x = (x / window.innerWidth) * 2 - 1;
+        y = -(y / window.innerHeight) * 2 + 1;
 
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
+        mouseVector.set(x, y, 0.5);
+        raycaster.setFromCamera(mouseVector, camera);
 
-			renderer.setSize( window.innerWidth, window.innerHeight );
-
-		}
-
-		var selectedObject = null;
-
-		function onDocumentMouseMove( event ) {
-
-			event.preventDefault();
-			if ( selectedObject ) {
-
-				selectedObject.material.color.set( selectedObject.originColor );
-				selectedObject = null;
-
-			}
-
-			var intersects = getIntersects( event.layerX, event.layerY );
-			if ( intersects.length > 0 ) {
-
-				var res = intersects.filter( function ( res ) {
-
-					return res && res.object;
-
-				} )[ 0 ];
-
-				if ( res && res.object ) {
-
-					selectedObject = res.object;
-					selectedObject.originColor = selectedObject.material.color.getHex();
-					selectedObject.material.color.set( '#f00' );
-
-				}
-
-			}
-
-		}
-
-		var raycaster = new THREE.Raycaster();
-		var mouseVector = new THREE.Vector3();
-
-		function getIntersects( x, y ) {
-
-			x = ( x / window.innerWidth ) * 2 - 1;
-			y = - ( y / window.innerHeight ) * 2 + 1;
-
-			mouseVector.set( x, y, 0.5 );
-			raycaster.setFromCamera( mouseVector, camera );
-
-			return raycaster.intersectObject( group, true );
-
-		}
-	</script><canvas
-        width="805" height="938" style="width: 805px; height: 938px;"></canvas>
-
+        return raycaster.intersectObject(group, true);
+      }
+    </script>
+    <canvas
+      width="805"
+      height="938"
+      style="width: 805px; height: 938px;"
+    ></canvas>
 
     <audio controls="controls" style="display: none;"></audio>
-</body>
-<style type="text/css">
+  </body>
+  <style type="text/css">
     #yddContainer {
-        display: block;
-        font-family: Microsoft YaHei;
-        position: relative;
-        width: 100%;
-        height: 100%;
-        top: -4px;
-        left: -4px;
-        font-size: 12px;
-        border: 1px solid
+      display: block;
+      font-family: Microsoft YaHei;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      top: -4px;
+      left: -4px;
+      font-size: 12px;
+      border: 1px solid;
     }
 
     #yddTop {
-        display: block;
-        height: 22px
+      display: block;
+      height: 22px;
     }
 
     #yddTopBorderlr {
-        display: block;
-        position: static;
-        height: 17px;
-        padding: 2px 28px;
-        line-height: 17px;
-        font-size: 12px;
-        color: #5079bb;
-        font-weight: bold;
-        border-style: none solid;
-        border-width: 1px
+      display: block;
+      position: static;
+      height: 17px;
+      padding: 2px 28px;
+      line-height: 17px;
+      font-size: 12px;
+      color: #5079bb;
+      font-weight: bold;
+      border-style: none solid;
+      border-width: 1px;
     }
 
     #yddTopBorderlr .ydd-sp {
-        position: absolute;
-        top: 2px;
-        height: 0;
-        overflow: hidden
+      position: absolute;
+      top: 2px;
+      height: 0;
+      overflow: hidden;
     }
 
     .ydd-icon {
-        left: 5px;
-        width: 17px;
-        padding: 0px 0px 0px 0px;
-        padding-top: 17px;
-        background-position: -16px -44px
+      left: 5px;
+      width: 17px;
+      padding: 0px 0px 0px 0px;
+      padding-top: 17px;
+      background-position: -16px -44px;
     }
 
     .ydd-close {
-        right: 5px;
-        width: 16px;
-        padding-top: 16px;
-        background-position: left -44px
+      right: 5px;
+      width: 16px;
+      padding-top: 16px;
+      background-position: left -44px;
     }
 
     #yddKeyTitle {
-        float: left;
-        text-decoration: none
+      float: left;
+      text-decoration: none;
     }
 
     #yddMiddle {
-        display: block;
-        margin-bottom: 10px
+      display: block;
+      margin-bottom: 10px;
     }
 
     .ydd-tabs {
-        display: block;
-        margin: 5px 0;
-        padding: 0 5px;
-        height: 18px;
-        border-bottom: 1px solid
+      display: block;
+      margin: 5px 0;
+      padding: 0 5px;
+      height: 18px;
+      border-bottom: 1px solid;
     }
 
     .ydd-tab {
-        display: block;
-        float: left;
-        height: 18px;
-        margin: 0 5px -1px 0;
-        padding: 0 4px;
-        line-height: 18px;
-        border: 1px solid;
-        border-bottom: none
+      display: block;
+      float: left;
+      height: 18px;
+      margin: 0 5px -1px 0;
+      padding: 0 4px;
+      line-height: 18px;
+      border: 1px solid;
+      border-bottom: none;
     }
 
     .ydd-trans-container {
-        display: block;
-        line-height: 160%
+      display: block;
+      line-height: 160%;
     }
 
     .ydd-trans-container a {
-        text-decoration: none;
+      text-decoration: none;
     }
 
     #yddBottom {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 22px;
-        line-height: 22px;
-        overflow: hidden;
-        background-position: left -22px
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 22px;
+      line-height: 22px;
+      overflow: hidden;
+      background-position: left -22px;
     }
 
     .ydd-padding010 {
-        padding: 0 10px
+      padding: 0 10px;
     }
 
     #yddWrapper {
-        color: #252525;
-        z-index: 10001;
-        background: url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ab20.png);
+      color: #252525;
+      z-index: 10001;
+      background: url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ab20.png);
     }
 
     #yddContainer {
-        background: #fff;
-        border-color: #4b7598
+      background: #fff;
+      border-color: #4b7598;
     }
 
     #yddTopBorderlr {
-        border-color: #f0f8fc
+      border-color: #f0f8fc;
     }
 
     #yddWrapper .ydd-sp {
-        background-image: url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ydd-sprite.png)
+      background-image: url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ydd-sprite.png);
     }
 
     #yddWrapper a,
     #yddWrapper a:hover,
     #yddWrapper a:visited {
-        color: #50799b
+      color: #50799b;
     }
 
     #yddWrapper .ydd-tabs {
-        color: #959595
+      color: #959595;
     }
 
     .ydd-tabs,
     .ydd-tab {
-        background: #fff;
-        border-color: #d5e7f3
+      background: #fff;
+      border-color: #d5e7f3;
     }
 
     #yddBottom {
-        color: #363636
+      color: #363636;
     }
 
     #yddWrapper {
-        min-width: 250px;
-        max-width: 400px;
+      min-width: 250px;
+      max-width: 400px;
     }
-</style>
-
+  </style>
 </html>
