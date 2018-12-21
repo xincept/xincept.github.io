@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <script src="../lib/xmap.min.js"></script>
+    <link rel="stylesheet" href="../lib/bootstrap.min.css" />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      #xmap {
+        width: 100%;
+        height: 100%;
+      }
+      .btn.btn-default {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="xmap"></div>
+    <button class="btn btn-default">动画关闭</button>
+    <script>
+      window.onload = function() {
+        var map = new XMap.Map("#xmap", {});
+        map.load("../files/data.json");
+        let location = new XMap.Location("F1", 0, 0);
+        let marker = new XMap.Marker(location, {
+          icon: "img/marker_red_sprite.png",
+          size: new XMap.Point(19, 25),
+          offset: new XMap.Point(0, -12.5)
+        });
+        map.addOverlay(marker);
+
+        var aBtn = document.querySelector(".btn-default");
+        aBtn.onclick = function() {
+          this.classList.toggle("btn-primary");
+          if (this.classList.contains("btn-primary")) {
+            marker.jump({
+              repeat: -1, // 循环次数，-1表示无限循环，0表示单次，默认值：-1
+              duration: 0.8, // 动画时长(s)，默认值：1
+              delay: 0.4, // 两次动画的间隔时长(s)， 默认值：0
+              height: 50 // 跳动高度(pixel)，默认值：40
+            });
+            aBtn.innerText = "动画开启";
+          } else {
+            marker.jumpStop();
+            aBtn.innerText = "动画关闭";
+          }
+        };
+      };
+    </script>
+  </body>
+</html>

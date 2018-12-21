@@ -11,6 +11,11 @@
         {
           "id": "xmap_view_mode",
           "name": "2D/3D切换"
+        },
+        {
+          "id": "xmap_theme",
+          "name": "主题加载及切换",
+          "isNew": true
         }
       ]
     },
@@ -23,12 +28,15 @@
         },
         {
           "id": "xmap_overlay_info_window",
-          "name": "HTML信息窗口",
-          "isNew": true
+          "name": "HTML信息窗口"
         },
         {
           "id": "xmap_overlay_html_custom",
-          "name": "自定义HTML覆盖物",
+          "name": "自定义HTML覆盖物"
+        },
+        {
+          "id": "xmap_marker_jump",
+          "name": "覆盖物动画",
           "isNew": true
         }
       ]
@@ -42,7 +50,11 @@
         },
         {
           "id": "xmap_event_map_once",
-          "name": "自动移除点击事件",
+          "name": "一次性点击事件"
+        },
+        {
+          "id": "xmap_marker_event",
+          "name": "覆盖物点击事件",
           "isNew": true
         }
       ]

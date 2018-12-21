@@ -6,7 +6,6 @@
         padding: 0;
         margin: 0;
       }
-
       #xmap {
         width: 100%;
         height: 100%;
@@ -27,6 +26,10 @@
           offset: new XMap.Point(0, -12.5)
         });
         map.addOverlay(marker);
+
+        marker.on("click", event => {
+          alert("你点击了覆盖物");
+        });
       };
     </script>
   </body>

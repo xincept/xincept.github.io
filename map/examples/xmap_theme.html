@@ -29,29 +29,28 @@
 <body>
   <div id="xmap"></div>
   <div class="viewmode-group btn-group-vertical" data-toggle="buttons">
-    <button class="btn btn-default btn-primary">2D</button>
-    <button class="btn btn-default">3D</button>
+    <button class="btn btn-default">默认主题</button>
+    <button class="btn btn-default btn-primary">自定义主题</button>
   </div>
   <div>
     <script>
       window.onload = function () {
         var map = new XMap.Map("#xmap", {
-          viewMode: XMap.ViewMode.MODE_2D
         });
         map.load("../files/data.json");
+        map.loadTheme("light", "../files/theme/light.json")
+          .then(() => map.setTheme("light"));
+
         var aBtn = document.querySelectorAll('.btn');
-        //开启2维模式
+
         aBtn[0].onclick = function () {
-          //设置地图为2维模式
-          map.setViewMode(XMap.ViewMode.MODE_2D)
+          map.setTheme()
           this.classList.add('btn-primary');
           aBtn[1].classList.remove('btn-primary');
         };
 
-        //开启3维模式
         aBtn[1].onclick = function () {
-          //设置地图为3维模式
-          map.setViewMode(XMap.ViewMode.MODE_3D)
+          map.setTheme("light")
           this.classList.add('btn-primary');
           aBtn[0].classList.remove('btn-primary');
         };
