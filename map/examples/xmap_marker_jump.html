@@ -18,7 +18,6 @@
       }
     </style>
   </head>
-
   <body>
     <div id="xmap"></div>
     <button class="btn btn-default">动画关闭</button>
@@ -30,7 +29,7 @@
         let marker = new XMap.Marker(location, {
           icon: "img/marker_red_sprite.png",
           size: new XMap.Point(19, 25),
-          offset: new XMap.Point(0, -12.5)
+          offset: new XMap.Point(0, -12.5),
         });
         map.addOverlay(marker);
 
@@ -42,7 +41,7 @@
               repeat: -1, // 循环次数，-1表示无限循环，0表示单次，默认值：-1
               duration: 0.8, // 动画时长(s)，默认值：1
               delay: 0.4, // 两次动画的间隔时长(s)， 默认值：0
-              height: 50 // 跳动高度(pixel)，默认值：40
+              height: 50, // 跳动高度(pixel)，默认值：40
             });
             aBtn.innerText = "动画开启";
           } else {
